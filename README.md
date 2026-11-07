@@ -1,4 +1,4 @@
-# secondbrain-mcp
+# silverbullet-local-mcp
 
 A small [Model Context Protocol](https://modelcontextprotocol.io) server (stdio) that gives MCP clients such as Codex, Opencode or Claude (desktop or code) access to a [SilverBullet](https://silverbullet.md) space through its HTTP file API (`/.fs`).
 
@@ -33,19 +33,31 @@ System pages (`Library/`, `Repositories/`, `SETTINGS`, `CONFIG`) are hidden by d
 
 If your SilverBullet instance has authentication enabled, `SB_TOKEN` is required; without it the server reports that authentication is needed.
 
-## Usage
+## Install as a Claude plugin
 
-Requires Node.js 20 or later.
+The repository is also a Claude plugin (`.claude-plugin/plugin.json`, `.mcp.json` and a skill that teaches Claude how to use the tools). When you enable it, Claude asks for:
+
+- **SilverBullet URL** (required)
+- **SilverBullet token** (optional, stored as a secret)
+- **Allow writing** (off by default)
+
+In Claude Code:
 
 ```sh
-npm install
-npm run build
+claude plugin marketplace add jesusr/secondbrain-mcp
+claude plugin install silverbullet-local@silverbullet-local-mcp
 ```
+
+The plugin runs the server locally with `npx`, so it works in Claude Code and in Claude Desktop on your computer, not in claude.ai on the web.
+
+## Use as a standalone MCP server
+
+Requires Node.js 20 or later.
 
 Claude Code:
 
 ```sh
-claude mcp add secondbrain -s user -e SB_URL=http://localhost:3000 -e SB_TOKEN=xxx -- node /path/to/secondbrain-mcp/dist/index.js
+claude mcp add silverbullet -s user -e SB_URL=http://localhost:3000 -e SB_TOKEN=xxx -- npx -y silverbullet-local-mcp
 ```
 
 Add `-e SB_ALLOW_WRITE=true` to enable writing.
@@ -55,11 +67,11 @@ Claude Desktop (`claude_desktop_config.json`):
 ```json
 {
   "mcpServers": {
-    "secondbrain": {
-      "command": "node",
-      "args": ["/path/to/secondbrain-mcp/dist/index.js"],
+    "silverbullet": {
+      "command": "npx",
+      "args": ["-y", "silverbullet-local-mcp"],
       "env": {
-        "SB_URL": "https://domain.dd/",
+        "SB_URL": "http://localhost:3000",
         "SB_TOKEN": "xxx"
       }
     }
@@ -68,6 +80,24 @@ Claude Desktop (`claude_desktop_config.json`):
 ```
 
 The token lives in plain text in your client configuration: treat that file as a secret.
+
+From source:
+
+```sh
+npm install
+npm run build
+node dist/index.js   # with SB_URL (and SB_TOKEN) set
+```
+
+## Privacy Policy
+
+This server runs entirely on your computer and collects nothing.
+
+- **Data collection**: none. The server has no telemetry, analytics or crash reporting.
+- **Usage and storage**: it reads and, only if you enable writing, modifies pages in the SilverBullet space you configure, by calling that space's HTTP API. Page content passes through the server to your MCP client (for example Claude) when a tool is called; the server itself stores nothing on disk.
+- **Third-party sharing**: the server only talks to the SilverBullet URL you configure. It sends no data to the author or any other third party. What your MCP client does with the content it receives is governed by that client's own privacy policy (for Claude, Anthropic's).
+- **Data retention**: none. Nothing is kept after a request completes. Your token is stored by your MCP client (as a secret when installed as a Claude plugin), not by this server.
+- **Contact**: open an issue at https://github.com/jesusr/secondbrain-mcp/issues.
 
 ## License
 

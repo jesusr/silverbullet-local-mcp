@@ -1,19 +1,21 @@
 {
-  "name": "secondbrain-mcp",
+  "name": "silverbullet-local-mcp",
   "version": "0.1.0",
-  "description": "MCP server (stdio) for a SilverBullet space, using its HTTP file API",
+  "description": "Local (stdio) MCP server and Claude plugin for a SilverBullet space, using its HTTP file API",
   "keywords": [
     "mcp",
     "model-context-protocol",
     "silverbullet",
     "notes",
-    "claude"
+    "claude",
+    "claude-plugin"
   ],
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build"
   },
   "license": "MIT",
   "author": {
@@ -30,7 +32,7 @@
     "typescript": "^7.0.2"
   },
   "bin": {
-    "secondbrain-mcp": "dist/index.js"
+    "silverbullet-local-mcp": "dist/index.js"
   },
   "engines": {
     "node": ">=20"
@@ -39,5 +41,10 @@
     "dist",
     "README.md",
     "LICENSE"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesusr/secondbrain-mcp.git"
+  },
+  "homepage": "https://github.com/jesusr/secondbrain-mcp#readme"
 }

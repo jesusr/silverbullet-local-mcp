@@ -1,0 +1,14 @@
+{
+  "name": "silverbullet-local-mcp",
+  "owner": {
+    "name": "jesusr",
+    "url": "https://github.com/jesusr"
+  },
+  "plugins": [
+    {
+      "name": "silverbullet-local",
+      "source": "./",
+      "description": "Read, search and (optionally) edit your SilverBullet space from Claude through a local MCP server."
+    }
+  ]
+}

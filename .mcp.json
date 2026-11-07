@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "silverbullet": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "silverbullet-local-mcp@0.1.0"
+      ],
+      "env": {
+        "SB_URL": "${user_config.sb_url}",
+        "SB_TOKEN": "${user_config.sb_token}",
+        "SB_ALLOW_WRITE": "${user_config.sb_allow_write}"
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "silverbullet-local",
+  "version": "0.1.0",
+  "description": "Read, search and (optionally) edit your SilverBullet space from Claude, through a local MCP server that talks to SilverBullet's HTTP API.",
+  "author": {
+    "name": "jesusr",
+    "url": "https://github.com/jesusr"
+  },
+  "homepage": "https://github.com/jesusr/secondbrain-mcp",
+  "repository": "https://github.com/jesusr/secondbrain-mcp",
+  "license": "MIT",
+  "keywords": [
+    "silverbullet",
+    "notes",
+    "knowledge-base",
+    "mcp"
+  ],
+  "userConfig": {
+    "sb_url": {
+      "type": "string",
+      "title": "SilverBullet URL",
+      "description": "Base URL of your SilverBullet space, e.g. http://localhost:3000",
+      "required": true
+    },
+    "sb_token": {
+      "type": "string",
+      "title": "SilverBullet token",
+      "description": "Value of SB_AUTH_TOKEN on your SilverBullet server. Leave empty if authentication is disabled.",
+      "sensitive": true,
+      "required": false
+    },
+    "sb_allow_write": {
+      "type": "boolean",
+      "title": "Allow writing",
+      "description": "Enable the write_page and append_to_page tools",
+      "default": false
+    }
+  }
+}

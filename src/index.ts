@@ -19,7 +19,7 @@ const SYSTEM_PREFIXES = (process.env.SB_EXCLUDE ?? "Library/,Repositories/,SETTI
 
 const sb = new SilverBulletClient({ baseUrl: BASE_URL, token: process.env.SB_TOKEN });
 
-const server = new McpServer({ name: "secondbrain", version: "0.1.0" });
+const server = new McpServer({ name: "silverbullet-local-mcp", version: "0.1.0" });
 
 const includeSystem = z
   .boolean()
